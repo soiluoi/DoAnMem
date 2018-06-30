@@ -1,0 +1,16 @@
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\bin\Debug\DoAnMemDAL.dll
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\bin\Debug\DoAnMemDAL.pdb
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\bin\Debug\DoAnMemDAL.xml
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\bin\Debug\DoAnMemDTO.dll
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\bin\Debug\DoAnMemDTO.pdb
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\bin\Debug\DoAnMemDTO.xml
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\obj\Debug\DoAnMemDAL.vbprojResolveAssemblyReference.cache
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\obj\Debug\DoAnMemDAL.Resources.resources
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\obj\Debug\DoAnMemDAL.vbproj.GenerateResource.Cache
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\obj\Debug\DoAnMemDAL.vbproj.CoreCompileInputs.cache
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\obj\Debug\DoAnMemDAL.dll
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\obj\Debug\DoAnMemDAL.xml
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\obj\Debug\DoAnMemDAL.pdb
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\bin\Debug\Utility.dll
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\bin\Debug\Utility.pdb
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDAL\bin\Debug\Utility.xml

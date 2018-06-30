@@ -1,0 +1,13 @@
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDTO\bin\Debug\DoAnMemDTO.dll
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDTO\bin\Debug\DoAnMemDTO.pdb
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDTO\bin\Debug\DoAnMemDTO.xml
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDTO\obj\Debug\DoAnMemDTO.vbprojResolveAssemblyReference.cache
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDTO\obj\Debug\DoAnMemDTO.Resources.resources
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDTO\obj\Debug\DoAnMemDTO.vbproj.GenerateResource.Cache
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDTO\obj\Debug\DoAnMemDTO.vbproj.CoreCompileInputs.cache
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDTO\obj\Debug\DoAnMemDTO.dll
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDTO\obj\Debug\DoAnMemDTO.xml
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDTO\obj\Debug\DoAnMemDTO.pdb
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDTO\bin\Debug\Utility.dll
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDTO\bin\Debug\Utility.pdb
+C:\Users\Soiluoi\source\repos\DoAnMem\DoAnMemDTO\bin\Debug\Utility.xml
