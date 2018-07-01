@@ -18,7 +18,7 @@ Public Class HoSoDaiLyBUS
         Return dlDAL.loadQuan(listQuan)
     End Function
     Public Function loadDL(ByRef listDL As List(Of HoSoDaiLyDTO)) As Result
-        Return dlDAL.loadDL(listDL)
+        Return New Result(dlDAL.loadDL(listDL))
     End Function
     Public Function loadLoaiDL(listLoaiDL As List(Of LoaiDLDTO)) As Result
         Return dlDAL.loadLoaiDL(listLoaiDL)

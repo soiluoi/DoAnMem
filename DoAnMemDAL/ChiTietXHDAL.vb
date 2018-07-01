@@ -1,13 +1,36 @@
 ﻿Imports System.Data.SqlClient
 Imports DoAnMemDTO
 Imports Utility
-Public Class ThongTinMHDAL
-    Dim cnString As String = ConnectionString()
 
-    Public Function load(ByRef mh As List(Of ThongTinMHDTO)) As Boolean
+Public Class ChiTietXHDAL
+    Dim cnString As String = ConnectionString()
+    Public Function cancel(maP As Int64) As Boolean
         Dim query As String = String.Empty
-        query &= " SELECT MAMH,TENMH,DONGIA, DONVITINH "
-        query &= " FROM  MATHANG "
+        query &= "delete CHITIETXUATHANG WHERE MAPXH = " & maP
+        query &= " delete PHIEUXUATHANG WHERE MAPXH = " & maP
+        Using conn As New SqlConnection(cnString)
+            Using comm As New SqlCommand()
+                With comm
+                    .Connection = conn
+                    .CommandType = CommandType.Text
+                    .CommandText = query
+                End With
+                Try
+                    conn.Open()
+                    comm.ExecuteNonQuery()
+                Catch ex As Exception
+                    conn.Close()
+                    Return False
+                End Try
+            End Using
+        End Using
+        Return True
+    End Function
+    Public Function load(ByRef listCT As List(Of ChiTietXHDTO), maP As Int64) As Boolean
+        Dim query As String = String.Empty
+        query &= " SELECT MH.MAMH,MH.TENMH,MH.DONVITINH, CT.SOLUONG, MH.DONGIA, CT.THANHTIEN"
+        query &= " FROM MATHANG MH,CHITIETXUATHANG CT"
+        query &= " WHERE MH.MAMH=CT.MAMH AND CT.MAPXH= " & maP
         Using conn As New SqlConnection(cnString)
             Using comm As New SqlCommand()
                 With comm
@@ -20,9 +43,9 @@ Public Class ThongTinMHDAL
                     Dim reader As SqlDataReader
                     reader = comm.ExecuteReader()
                     If reader.HasRows Then
-                        mh.Clear()
+                        listCT.Clear()
                         While reader.Read()
-                            mh.Add(New ThongTinMHDTO(reader("MAMH"), reader("TENMH"), reader("DONGIA"), reader("DONVITINH")))
+                            listCT.Add(New ChiTietXHDTO(reader("MAMH"), reader("TENMH"), reader("DONVITINH"), reader("SOLUONG"), reader("DONGIA"), reader("THANHTIEN")))
                         End While
                     End If
                 Catch ex As Exception
@@ -33,21 +56,34 @@ Public Class ThongTinMHDAL
                 End Try
             End Using
         End Using
-        Return True
+        Return True ' thanh cong
     End Function
-    Public Function update(dl As ThongTinMHDTO) As Boolean
+    Public Function insertP(ByRef dl As PXuatHangDTO) As Boolean
         Dim query As String = String.Empty
-        query &= "UPDATE MATHANG SET"
-        query &= " TENMH= N'" & dl.TenMH & "'"
-        query &= ",DONGIA= " & dl.DonGia
-        query &= ",DONVITINH= '" & dl.DVTinh & "'"
-        query &= " WHERE MAMH= " & dl.MaMH
+        query &= "INSERT INTO PHIEUXUATHANG"
+        query &= "(  MAPXH "
+        query &= "  ,MADL "
+        query &= "  ,NGAYLAPPHIEU) "
+        query &= "VALUES "
+        query &= "(   @mapxh"
+        query &= "   ,@madl"
+        query &= "   ,@ngaylp)"
+        Dim nextmaDL As Int16
+        Dim result As Result
+        result = getNextID(nextmaDL, "MAPXH", "PHIEUXUATHANG")
+        If result.FlagResult = False Then
+            Return False
+        End If
+        dl.MaP = nextmaDL
         Using conn As New SqlConnection(cnString)
             Using comm As New SqlCommand()
                 With comm
                     .Connection = conn
                     .CommandType = CommandType.Text
                     .CommandText = query
+                    .Parameters.AddWithValue("@mapxh", dl.MaP)
+                    .Parameters.AddWithValue("@madl", dl.MaDL)
+                    .Parameters.AddWithValue("@ngaylp", dl.NgayLap)
                 End With
                 Try
                     conn.Open()
@@ -61,44 +97,11 @@ Public Class ThongTinMHDAL
         End Using
         Return True
     End Function
-    Public Function soMH(ByRef num As Int64) As Boolean
+    Public Function insertCTP(dl As ChiTietXHDTO) As Boolean
         Dim query As String = String.Empty
-        query &= " SELECT count(*)"
-        query &= " FROM MATHANG"
-        Using conn As New SqlConnection(cnString)
-            Using comm As New SqlCommand()
-                With comm
-                    .Connection = conn
-                    .CommandType = CommandType.Text
-                    .CommandText = query
-                End With
-                Try
-                    conn.Open()
-                    num = comm.ExecuteScalar()
-                Catch ex As Exception
-                    Console.WriteLine(ex.StackTrace)
-                    conn.Close()
-                    ' them that bai!!!
-                    Return False
-                End Try
-            End Using
-        End Using
-        ' thanh cong
-        Return True
-    End Function
-    Public Function insertMH(dl As ThongTinMHDTO) As Result
-        Dim query As String = String.Empty
-        query &= "INSERT INTO MATHANG"
-        query &= "(MAMH , TENMH, DONGIA,DONVITINH)"
-        query &= " VALUES "
-        query &= " (@mamh,@tenmh,@dongia,@dvtinh)"
-        Dim nextID As Int16
-        Dim result As Result
-        result = getNextID(nextID, "MAMH", "MATHANG")
-        If result.FlagResult = False Then
-            Return result
-        End If
-        dl.MaMH = nextID
+        query &= "INSERT INTO CHITIETXUATHANG (MAMH,MAPXH,SOLUONG,THANHTIEN)"
+        query &= " VALUES (@mamh,@map,@soluong,@thanhtien)"
+
         Using conn As New SqlConnection(cnString)
             Using comm As New SqlCommand()
                 With comm
@@ -106,10 +109,9 @@ Public Class ThongTinMHDAL
                     .CommandType = CommandType.Text
                     .CommandText = query
                     .Parameters.AddWithValue("@mamh", dl.MaMH)
-                    .Parameters.AddWithValue("@tenmh", dl.TenMH)
-                    .Parameters.AddWithValue("@dongia", dl.DonGia)
-                    .Parameters.AddWithValue("@dvtinh", dl.DVTinh)
-
+                    .Parameters.AddWithValue("@map", dl.MaP)
+                    .Parameters.AddWithValue("@soluong", dl.SL)
+                    .Parameters.AddWithValue("@thanhtien", dl.ThanhTien)
                 End With
                 Try
                     conn.Open()
@@ -117,15 +119,15 @@ Public Class ThongTinMHDAL
                 Catch ex As Exception
                     conn.Close()
                     ' them that bai!!!
-                    Return New Result(False, "Thêm mặt hàng không thành công", ex.StackTrace)
+                    Return False
                 End Try
             End Using
         End Using
-        Return New Result(True)
+        Return True
     End Function
-    Public Function delete(ID As Int64) As Boolean
+    Public Function delete(maP As Int64, maMH As Int64) As Boolean
         Dim query As String = String.Empty
-        query &= "delete MATHANG WHERE MAMH = " & ID
+        query &= "delete CHITIETXUATHANG WHERE MAPXH = " & maP & " AND MAMH=" & maMH
         Using conn As New SqlConnection(cnString)
             Using comm As New SqlCommand()
                 With comm
@@ -138,6 +140,31 @@ Public Class ThongTinMHDAL
                     comm.ExecuteNonQuery()
                 Catch ex As Exception
                     conn.Close()
+                    Return False
+                End Try
+            End Using
+        End Using
+        Return True
+    End Function
+    Public Function update(dl As ChiTietXHDTO) As Boolean
+        Dim query As String = String.Empty
+        query &= "UPDATE CHITIETXUATHANG SET"
+        query &= " SOLUONG= " & dl.SL
+        query &= " ,THANHTIEN= " & dl.ThanhTien
+        query &= " WHERE MAMH= " & dl.MaMH & " and MAPXH=" & dl.MaP
+        Using conn As New SqlConnection(cnString)
+            Using comm As New SqlCommand()
+                With comm
+                    .Connection = conn
+                    .CommandType = CommandType.Text
+                    .CommandText = query
+                End With
+                Try
+                    conn.Open()
+                    comm.ExecuteNonQuery()
+                Catch ex As Exception
+                    conn.Close()
+                    ' them that bai!!!
                     Return False
                 End Try
             End Using

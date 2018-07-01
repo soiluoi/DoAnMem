@@ -25,18 +25,18 @@
         _maDL = maQuan
         _tienNo = 0
     End Sub
-    Public Sub New(maDL As Int64, tenDL As String, maLoaiDL As Int64, diaChi As String, maQuan As Int64, sdt As String, email As String, ngayTN As Date, tienNo As Int64)
-        _maDL = maDL
-        _tenDL = tenDL
-        _maQuan = maQuan
-        _diaChi = diaChi
-        _sdt = sdt
-        _maLoaiDL = maLoaiDL
-        _email = email
-        _ngayTN = ngayTN
-        _tienNo = tienNo
-    End Sub
-    Public Sub New(maDL As Int64, tenDL As String, tenLoaiDL As String, diaChi As String, tenQuan As String, sdt As String, email As String, ngayTN As Date)
+    'Public Sub New(maDL As Int64, tenDL As String, maLoaiDL As Int64, diaChi As String, maQuan As Int64, sdt As String, email As String, ngayTN As String, tienNo As Int64)
+    '    _maDL = maDL
+    '    _tenDL = tenDL
+    '    _maQuan = maQuan
+    '    _diaChi = diaChi
+    '    _sdt = sdt
+    '    _maLoaiDL = maLoaiDL
+    '    _email = email
+    '    _ngayTN = ngayTN
+    '    _tienNo = tienNo
+    'End Sub
+    Public Sub New(maDL As Int64, tenDL As String, tenLoaiDL As String, diaChi As String, tenQuan As String, sdt As String, email As String, ngayTN As String, tienNo As Int64)
         _maDL = maDL
         _tenDL = tenDL
         _tenQuan = tenQuan
@@ -45,6 +45,7 @@
         _tenLoaiDL = tenLoaiDL
         _email = email
         _ngayTN = ngayTN
+        _tienNo = tienNo
     End Sub
 
     Public Property MaQuan As Int64

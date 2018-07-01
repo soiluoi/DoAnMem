@@ -81,8 +81,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="QDToChucBUS.vb" />
-    <Compile Include="QuyDinhMHBUS.vb" />
     <Compile Include="ThongTinMHBUS.vb" />
+    <Compile Include="PXuatHangBUS.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

@@ -12,7 +12,7 @@ Public Class ThongTinMHBUS
         qdtcDAL.loadQCToChuc(qdtc)
     End Sub
     Public Function loadMH(listMH As List(Of ThongTinMHDTO)) As Result
-        Return New Result(ttmhDAL.loadMH(listMH))
+        Return New Result(ttmhDAL.load(listMH))
     End Function
     Public Function isFull() As Result
         Try
@@ -34,7 +34,8 @@ Public Class ThongTinMHBUS
     Public Function updateMH(mh As ThongTinMHDTO) As Result
         Return New Result(ttmhDAL.update(mh))
     End Function
-    Public Function delete(ID As Int64) As Result
+    Public Function deleteMH(ID As Int64) As Result
         Return New Result(ttmhDAL.delete(ID))
     End Function
+
 End Class

@@ -63,6 +63,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChiTietXHDTO.vb" />
     <Compile Include="HoSoDaiLyDTO.vb" />
     <Compile Include="LoaiDLDTO.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -80,9 +81,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="PXuatHangDTO.vb" />
     <Compile Include="QDToChucDTO.vb" />
     <Compile Include="QuanDTO.vb" />
-    <Compile Include="QuyDinhMHDTO.vb" />
     <Compile Include="ThongTinMHDTO.vb" />
   </ItemGroup>
   <ItemGroup>

@@ -149,9 +149,9 @@ Public Class HoSoDaiLyDAL
         End Using
         Return New Result(True) ' thanh cong
     End Function
-    Public Function loadDL(ByRef listDL As List(Of HoSoDaiLyDTO)) As Result
+    Public Function loadDL(ByRef listDL As List(Of HoSoDaiLyDTO)) As Boolean
         Dim query As String = String.Empty
-        query &= " SELECT MADL,TENDL,TENLOAIDL,DIACHI,TENQUAN,SDT,EMAIL,NGAYTN"
+        query &= " SELECT MADL,TENDL,TENLOAIDL,DIACHI,TENQUAN,SDT,EMAIL,NGAYTN,TIENNO"
         query &= " FROM DAILY DL,DSQUAN Q,LOAIDL L"
         query &= " WHERE DL.MALOAIDL=L.MALOAIDL AND DL.MAQUAN=Q.MAQUAN"
         Using conn As New SqlConnection(cnString)
@@ -168,18 +168,18 @@ Public Class HoSoDaiLyDAL
                     If reader.HasRows Then
                         listDL.Clear()
                         While reader.Read()
-                            listDL.Add(New HoSoDaiLyDTO(reader("MADL"), reader("TENDL"), reader("TENLOAIDL"), reader("DIACHI"), reader("TENQUAN"), reader("SDT"), reader("EMAIL"), reader("NGAYTN")))
+                            listDL.Add(New HoSoDaiLyDTO(reader("MADL"), reader("TENDL"), reader("TENLOAIDL"), reader("DIACHI"), reader("TENQUAN"), reader("SDT"), reader("EMAIL"), reader("NGAYTN"), reader("TIENNO")))
                         End While
                     End If
                 Catch ex As Exception
                     Console.WriteLine(ex.StackTrace)
                     conn.Close()
                     ' them that bai!!!
-                    Return New Result(False, "Load đại lý không thành công", ex.StackTrace)
+                    Return False
                 End Try
             End Using
         End Using
-        Return New Result(True) ' thanh cong
+        Return True
     End Function
     Public Function deleteDL(maDL As Int64, maQuan As Int64) As Result
         Dim query As String = String.Empty
@@ -206,9 +206,9 @@ Public Class HoSoDaiLyDAL
     Public Function updateDL(dl As HoSoDaiLyDTO) As Result
         Dim query As String = String.Empty
         query &= "UPDATE DAILY SET"
-        query &= " TENDL= '" & dl.TenDL & "'"
+        query &= " TENDL= N'" & dl.TenDL & "'"
         query &= ",MALOAIDL= " & dl.MaLoaiDL
-        query &= ",DIACHI= '" & dl.DiaChi & "'"
+        query &= ",DIACHI= N'" & dl.DiaChi & "'"
         query &= ",MAQUAN= " & dl.MaQuan
         query &= ",SDT= '" & dl.SDT & "'"
         query &= ",EMAIL= '" & dl.Email & "'"
@@ -232,5 +232,29 @@ Public Class HoSoDaiLyDAL
             End Using
         End Using
         Return New Result(True)
+    End Function
+    Public Function ganNo(tien As Int64, madl As Int64) As Boolean
+        Dim query As String = String.Empty
+        query &= "UPDATE DAILY SET"
+        query &= " TIENNO= " & tien
+        query &= " WHERE MADL = " & madl
+        Using conn As New SqlConnection(cnString)
+            Using comm As New SqlCommand()
+                With comm
+                    .Connection = conn
+                    .CommandType = CommandType.Text
+                    .CommandText = query
+                End With
+                Try
+                    conn.Open()
+                    comm.ExecuteNonQuery()
+                Catch ex As Exception
+                    conn.Close()
+                    ' them that bai!!!
+                    Return False
+                End Try
+            End Using
+        End Using
+        Return True
     End Function
 End Class
